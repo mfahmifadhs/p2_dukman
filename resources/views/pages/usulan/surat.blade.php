@@ -95,7 +95,7 @@
 <body>
 
     <div class="header">
-        <img src="{{ public_path('dist/img/header-'.$data->pegawai->uker->utama_id.'.png') }}">
+        <img src="{{ base_path('public/dist/img/header-'.$data->pegawai->uker->utama_id.'.png') }}" width="100%">
     </div>
 
     <div class="title">
