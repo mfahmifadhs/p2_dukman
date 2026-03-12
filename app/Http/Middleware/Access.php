@@ -19,6 +19,7 @@ class Access
         $role  = Auth::user()->role_id;
         $akses = Auth::user()->akses_id;
 
+
         if ($status == 'master')
         {
             if ($role == 1) {

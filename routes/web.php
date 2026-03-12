@@ -135,14 +135,12 @@ Route::group(['middleware' => 'auth'], function () {
             Route::post('item-store',       [AtkDistribusiController::class, 'itemStore'])->name('item.store');
             Route::post('item-update/{id}', [AtkDistribusiController::class, 'itemUpdate'])->name('item.update');
         });
-
     });
 
     // Akses Super User
     Route::group(['middleware' => ['access:monitor']], function () {
 
         Route::get('kriteria', [PenilaianKriteriaController::class, 'show'])->name('kriteria');
-
     });
 
     // Akses Admin
@@ -150,76 +148,75 @@ Route::group(['middleware' => 'auth'], function () {
 
         Route::get('kriteria/store', [PenilaianKriteriaController::class, 'store'])->name('kriteria.store');
         Route::post('kriteria/update/{id}', [PenilaianKriteriaController::class, 'update'])->name('kriteria.update');
-
-        Route::group(['middleware' => ['access:admin-atk']], function () {
-            Route::get('atk-barang',                    [AtkController::class, 'show'])->name('atk-barang');
-            Route::get('atk-barang/select',             [AtkController::class, 'select'])->name('atk-barang.select');
-            Route::get('atk-barang/select/detail/{id}', [AtkController::class, 'selectById'])->name('atk-barang.select-detail');
-            Route::get('atk-barang/detail/{id}',        [AtkController::class, 'detail'])->name('atk-barang.detail');
-            Route::get('atk-barang/edit/{id}',          [AtkController::class, 'edit'])->name('atk-barang.edit');
-            Route::get('atk-barang/create',             [AtkController::class, 'create'])->name('atk-barang.create');
-            Route::post('atk-barang/store',             [AtkController::class, 'store'])->name('atk-barang.store');
-            Route::post('atk-barang/upload',            [AtkController::class, 'upload'])->name('atk-barang.upload');
-            Route::post('atk-barang/update',            [AtkController::class, 'update'])->name('atk-barang.update');
-
-            Route::get('atk-stok', [AtkStokController::class, 'show'])->name('atk-stok');
-            Route::get('atk-stok/detail/{id}', [AtkStokController::class, 'detail'])->name('atk-stok.detail');
-            Route::get('atk-stok/edit/{id}', [AtkStokController::class, 'edit'])->name('atk-stok.edit');
-            Route::get('atk-stok/delete/{id}', [AtkStokController::class, 'delete'])->name('atk-stok.delete');
-            Route::post('atk-stok/store', [AtkStokController::class, 'store'])->name('atk-stok.store');
-            Route::post('atk-stok/update/{id}', [AtkStokController::class, 'update'])->name('atk-stok.update');
-
-            Route::get('atk-stok/item-delete/{id}', [AtkStokController::class, 'itemDelete'])->name('atk-stok.item.delete');
-            Route::post('atk-stok/item-store', [AtkStokController::class, 'itemStore'])->name('atk-stok.item.store');
-            Route::post('atk-stok/item-update/{id}', [AtkStokController::class, 'itemUpdate'])->name('atk-stok.item.update');
-
-            Route::get('atk-kategori', [AtkKategoriController::class, 'show'])->name('atk-kategori');
-            Route::post('atk-kategori/store', [AtkKategoriController::class, 'store'])->name('atk-kategori.store');
-            Route::post('atk-kategori/update/{id}', [AtkKategoriController::class, 'update'])->name('atk-kategori.update');
-
-            Route::get('atk-satuan', [AtkSatuanController::class, 'show'])->name('atk-satuan');
-            Route::post('atk-satuan/store', [AtkSatuanController::class, 'store'])->name('atk-satuan.store');
-            Route::post('atk-satuan/update/{id}', [AtkSatuanController::class, 'update'])->name('atk-satuan.update');
-        });
-
-        Route::group(['middleware' => ['access:admin-aadb']], function () {
-            Route::get('aadb-kategori', [AadbKategoriController::class, 'show'])->name('aadb-kategori');
-            Route::group(['prefix' => 'aadb-kategori', 'as' => 'aadb-kategori.'], function () {
-                Route::post('store',       [AadbKategoriController::class, 'store'])->name('store');
-                Route::post('update/{id}', [AadbKategoriController::class, 'update'])->name('update');
-            });
-        });
-
-        Route::group(['middleware' => ['access:admin-bmhp']], function () {
-            Route::get('bmhp-kategori', [BmhpKategoriController::class, 'show'])->name('bmhp-kategori');
-            Route::group(['prefix' => 'bmhp-kategori', 'as' => 'bmhp-kategori.'], function () {
-                Route::post('store',       [BmhpKategoriController::class, 'store'])->name('store');
-                Route::post('update/{id}', [BBmhpKategoriControllerm::class, 'update'])->name('update');
-            });
-
-            Route::get('bmhp-barang',                    [BmhpController::class, 'show'])->name('bmhp-barang');
-            Route::get('bmhp-barang/select',             [BmhpController::class, 'select'])->name('bmhp-barang.select');
-            Route::get('bmhp-barang/select/detail/{id}', [BmhpController::class, 'selectById'])->name('bmhp-barang.select-detail');
-            Route::get('bmhp-barang/detail/{id}',        [BmhpController::class, 'detail'])->name('bmhp-barang.detail');
-            Route::get('bmhp-barang/edit/{id}',          [BmhpController::class, 'edit'])->name('bmhp-barang.edit');
-            Route::get('bmhp-barang/create',             [BmhpController::class, 'create'])->name('bmhp-barang.create');
-            Route::post('bmhp-barang/store',             [BmhpController::class, 'store'])->name('bmhp-barang.store');
-            Route::post('bmhp-barang/upload',            [BmhpController::class, 'upload'])->name('bmhp-barang.upload');
-            Route::post('bmhp-barang/update',            [BmhpController::class, 'update'])->name('bmhp-barang.update');
-
-            Route::get('bmhp-stok',                      [BmhpStokController::class, 'show'])->name('bmhp-stok');
-            Route::get('bmhp-stok/detail/{id}',          [BmhpStokController::class, 'detail'])->name('bmhp-stok.detail');
-            Route::get('bmhp-stok/edit/{id}',            [BmhpStokController::class, 'edit'])->name('bmhp-stok.edit');
-            Route::get('bmhp-stok/delete/{id}',          [BmhpStokController::class, 'delete'])->name('bmhp-stok.delete');
-            Route::get('bmhp-stok/item-delete/{id}',     [BmhpStokController::class, 'itemDelete'])->name('bmhp-stok.item.delete');
-            Route::post('bmhp-stok/store',               [BmhpStokController::class, 'store'])->name('bmhp-stok.store');
-            Route::post('bmhp-stok/update/{id}',         [BmhpStokController::class, 'update'])->name('bmhp-stok.update');
-            Route::post('bmhp-stok/item-store',          [BmhpStokController::class, 'itemStore'])->name('bmhp-stok.item.store');
-            Route::post('bmhp-stok/item-update/{id}',    [BmhpStokController::class, 'itemUpdate'])->name('bmhp-stok.item.update');
-        });
-
-
     });
+
+    Route::group(['middleware' => ['access:admin-atk']], function () {
+        Route::get('atk-barang',                    [AtkController::class, 'show'])->name('atk-barang');
+        Route::get('atk-barang/select',             [AtkController::class, 'select'])->name('atk-barang.select');
+        Route::get('atk-barang/select/detail/{id}', [AtkController::class, 'selectById'])->name('atk-barang.select-detail');
+        Route::get('atk-barang/detail/{id}',        [AtkController::class, 'detail'])->name('atk-barang.detail');
+        Route::get('atk-barang/edit/{id}',          [AtkController::class, 'edit'])->name('atk-barang.edit');
+        Route::get('atk-barang/create',             [AtkController::class, 'create'])->name('atk-barang.create');
+        Route::post('atk-barang/store',             [AtkController::class, 'store'])->name('atk-barang.store');
+        Route::post('atk-barang/upload',            [AtkController::class, 'upload'])->name('atk-barang.upload');
+        Route::post('atk-barang/update',            [AtkController::class, 'update'])->name('atk-barang.update');
+
+        Route::get('atk-stok', [AtkStokController::class, 'show'])->name('atk-stok');
+        Route::get('atk-stok/detail/{id}', [AtkStokController::class, 'detail'])->name('atk-stok.detail');
+        Route::get('atk-stok/edit/{id}', [AtkStokController::class, 'edit'])->name('atk-stok.edit');
+        Route::get('atk-stok/delete/{id}', [AtkStokController::class, 'delete'])->name('atk-stok.delete');
+        Route::post('atk-stok/store', [AtkStokController::class, 'store'])->name('atk-stok.store');
+        Route::post('atk-stok/update/{id}', [AtkStokController::class, 'update'])->name('atk-stok.update');
+
+        Route::get('atk-stok/item-delete/{id}', [AtkStokController::class, 'itemDelete'])->name('atk-stok.item.delete');
+        Route::post('atk-stok/item-store', [AtkStokController::class, 'itemStore'])->name('atk-stok.item.store');
+        Route::post('atk-stok/item-update/{id}', [AtkStokController::class, 'itemUpdate'])->name('atk-stok.item.update');
+
+        Route::get('atk-kategori', [AtkKategoriController::class, 'show'])->name('atk-kategori');
+        Route::post('atk-kategori/store', [AtkKategoriController::class, 'store'])->name('atk-kategori.store');
+        Route::post('atk-kategori/update/{id}', [AtkKategoriController::class, 'update'])->name('atk-kategori.update');
+
+        Route::get('atk-satuan', [AtkSatuanController::class, 'show'])->name('atk-satuan');
+        Route::post('atk-satuan/store', [AtkSatuanController::class, 'store'])->name('atk-satuan.store');
+        Route::post('atk-satuan/update/{id}', [AtkSatuanController::class, 'update'])->name('atk-satuan.update');
+    });
+
+    Route::group(['middleware' => ['access:admin-aadb']], function () {
+        Route::get('aadb-kategori', [AadbKategoriController::class, 'show'])->name('aadb-kategori');
+        Route::group(['prefix' => 'aadb-kategori', 'as' => 'aadb-kategori.'], function () {
+            Route::post('store',       [AadbKategoriController::class, 'store'])->name('store');
+            Route::post('update/{id}', [AadbKategoriController::class, 'update'])->name('update');
+        });
+    });
+
+    Route::group(['middleware' => ['access:admin-bmhp']], function () {
+        Route::get('bmhp-kategori', [BmhpKategoriController::class, 'show'])->name('bmhp-kategori');
+        Route::group(['prefix' => 'bmhp-kategori', 'as' => 'bmhp-kategori.'], function () {
+            Route::post('store',       [BmhpKategoriController::class, 'store'])->name('store');
+            Route::post('update/{id}', [BBmhpKategoriControllerm::class, 'update'])->name('update');
+        });
+
+        Route::get('bmhp-barang',                    [BmhpController::class, 'show'])->name('bmhp-barang');
+        Route::get('bmhp-barang/select',             [BmhpController::class, 'select'])->name('bmhp-barang.select');
+        Route::get('bmhp-barang/select/detail/{id}', [BmhpController::class, 'selectById'])->name('bmhp-barang.select-detail');
+        Route::get('bmhp-barang/detail/{id}',        [BmhpController::class, 'detail'])->name('bmhp-barang.detail');
+        Route::get('bmhp-barang/edit/{id}',          [BmhpController::class, 'edit'])->name('bmhp-barang.edit');
+        Route::get('bmhp-barang/create',             [BmhpController::class, 'create'])->name('bmhp-barang.create');
+        Route::post('bmhp-barang/store',             [BmhpController::class, 'store'])->name('bmhp-barang.store');
+        Route::post('bmhp-barang/upload',            [BmhpController::class, 'upload'])->name('bmhp-barang.upload');
+        Route::post('bmhp-barang/update',            [BmhpController::class, 'update'])->name('bmhp-barang.update');
+
+        Route::get('bmhp-stok',                      [BmhpStokController::class, 'show'])->name('bmhp-stok');
+        Route::get('bmhp-stok/detail/{id}',          [BmhpStokController::class, 'detail'])->name('bmhp-stok.detail');
+        Route::get('bmhp-stok/edit/{id}',            [BmhpStokController::class, 'edit'])->name('bmhp-stok.edit');
+        Route::get('bmhp-stok/delete/{id}',          [BmhpStokController::class, 'delete'])->name('bmhp-stok.delete');
+        Route::get('bmhp-stok/item-delete/{id}',     [BmhpStokController::class, 'itemDelete'])->name('bmhp-stok.item.delete');
+        Route::post('bmhp-stok/store',               [BmhpStokController::class, 'store'])->name('bmhp-stok.store');
+        Route::post('bmhp-stok/update/{id}',         [BmhpStokController::class, 'update'])->name('bmhp-stok.update');
+        Route::post('bmhp-stok/item-store',          [BmhpStokController::class, 'itemStore'])->name('bmhp-stok.item.store');
+        Route::post('bmhp-stok/item-update/{id}',    [BmhpStokController::class, 'itemUpdate'])->name('bmhp-stok.item.update');
+    });
+
 
     // Akses Super Admin
     Route::group(['middleware' => ['access:master']], function () {
@@ -249,6 +246,5 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('akses', [UserAksesController::class, 'show'])->name('akses');
         Route::post('akses/store', [UserAksesController::class, 'store'])->name('akses.store');
         Route::post('akses/update/{id}', [UserAksesController::class, 'update'])->name('akses.update');
-
     });
 });
