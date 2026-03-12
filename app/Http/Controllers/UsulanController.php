@@ -29,6 +29,7 @@ use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
 use Carbon\Carbon;
+use Mpdf\Mpdf;
 use Str;
 use Auth;
 use Illuminate\Support\Facades\Mail;
@@ -293,6 +294,12 @@ class UsulanController extends Controller
             $uker = Auth::user()->pegawai->uker_id;
             $aadb = Aadb::where('uker_id', $uker)->where('status', 'true')->orderBy('kualifikasi', 'desc')->orderBy('kategori_id', 'asc')->get();
             return view('pages.usulan.aadb.bbm.create', compact('aadb'));
+        }
+
+        if ($id == 'pinjam') {
+            $uker = Auth::user()->pegawai->uker_id;
+            $aadb = Aadb::where('uker_id', $uker)->where('status', 'true')->orderBy('kualifikasi', 'desc')->orderBy('kategori_id', 'asc')->get();
+            return view('pages.usulan.aadb.pinjam.create', compact('aadb'));
         }
 
         $gdn = GdnPerbaikan::orderBy('jenis_perbaikan', 'asc')->get();
@@ -655,7 +662,6 @@ class UsulanController extends Controller
                     $detail->aadb_id     = $aadb;
                     $detail->save();
                 }
-
             }
 
             Usulan::where('id_usulan', $id)->update([
@@ -717,10 +723,21 @@ class UsulanController extends Controller
     {
         $data  = Usulan::where('id_usulan', $id)->first();
         $utama = $data->user->pegawai->uker->utama_id;
-        $temp  = public_path('dist/format/format-' . $utama . '.pdf');
         $form  = $data->form->nama_form;
 
-        return view('pages.usulan.surat', compact('data'));
+        $html = view('pages.usulan.surat', compact('data', 'utama', 'form'))->render();
+
+        $mpdf = new Mpdf([
+            'format' => 'A4',
+            'orientation' => 'P'
+        ]);
+
+        $mpdf->WriteHTML($html);
+
+        return response($mpdf->Output(
+            'surat_usulan.pdf',
+            'D'
+        ));
     }
 
     // ===========================================================

@@ -7,7 +7,7 @@ use App\Models\AadbKategori;
 use App\Models\AadbKondisi;
 use App\Models\UnitKerja;
 use Illuminate\Http\Request;
-use Auth;
+use Illuminate\Support\Facades\Auth;
 
 class AadbController extends Controller
 {
@@ -79,7 +79,7 @@ class AadbController extends Controller
 
     public function edit($id)
     {
-        $uker     = UnitKerja::where('utama_id', '46593')->get();
+        $uker     = UnitKerja::where('utama_id', '46595')->get();
         $kategori = AadbKategori::where('status', 'true')->get();
         $kondisi  = AadbKondisi::get();
         $data     = Aadb::where('id_aadb', $id)->first();
@@ -104,9 +104,10 @@ class AadbController extends Controller
             'kualifikasi'       => $request->kualifikasi,
             'merk_tipe'         => $request->merktipe,
             'no_polisi'         => $request->nopolisi,
-            'no_bpkp'           => $request->nobpkp,
+            'no_bpkb'           => $request->nobpkb,
             'tanggal_perolehan' => $request->tanggal,
             'nilai_perolehan'   => (int)str_replace('.', '', $request->nilai),
+            'nilai_alokasi'     => (int)str_replace('.', '', $request->alokasi),
             'kondisi_id'        => $request->kondisi,
             'keterangan'        => $request->keterangan,
             'foto_barang'       => $fileName ?? $data->foto_barang,
@@ -198,7 +199,8 @@ class AadbController extends Controller
                 'nopolisi'    => $row->no_polisi,
                 'nobpkp'      => $row->no_bpkp,
                 'tanggal'     => $row->tanggal_perolehan,
-                'nilai'       => 'Rp' . number_format($row->nilai_perolehan, 0, '.'),
+                'alokasi'     => 'Rp' . number_format($row->nilai_alokasi, 0, '.'),
+                'realisasi'   => 'Rp',
                 'keterangan'  => $row->keterangan ?? '',
                 'status'      => $status,
                 'kondisi'     => $row->kondisi->nama_kondisi

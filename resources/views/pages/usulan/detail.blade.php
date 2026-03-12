@@ -215,6 +215,14 @@
                             <label class="w-50">Jabatan</label>
                             <span class="w-50">: Staf</span>
                         </div>
+                        <div class="input-group">
+                            <label class="w-50">SBBK</label>
+                            <span class="w-50">: 
+                                <a href="{{ route('usulan.surat', $data->id_usulan) }}" target="_blank">
+                                    <u><i class="fas fa-file-alt"></i> Lihat Surat</u>
+                                </a>
+                            </span>
+                        </div>
                         @endif
                     </div>
                     @endif

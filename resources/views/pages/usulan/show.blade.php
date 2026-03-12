@@ -4,12 +4,12 @@
 
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-3 mt-3">
             <div class="col-sm-12">
-                <h4 class="m-0">Daftar Usulan</h4>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}"> Dashboard</a></li>
-                    <li class="breadcrumb-item active">Usulan</li>
+                <h3 class="m-0 font-weight-bold text-dark">Daftar Usulan</h3>
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Daftar Usulan</li>
                 </ol>
             </div>
         </div>
@@ -21,22 +21,25 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12 form-group">
-                <div class="card card-primary">
+                <div class="card custom-card shadow-sm">
                     <div class="card-header">
                         <label class="card-title">
-                            Daftar Usulan
-                            @if ($formId == 4)
-                            Pemeliharaan AADB
-                            @elseif ($formId == 5)
-                            Permintaan BBM
-                            @else
-                            {{ $form->nama_form }}
-                            @endif
+                            <h4 class="font-weight-bold mb-1">
+                                Daftar Usulan
+                                @if ($formId == 4)
+                                Pemeliharaan Kendaraan
+                                @elseif ($formId == 5)
+                                Permintaan BBM
+                                @else
+                                {{ $form->nama_form }}
+                                @endif
+                            </h4>
+                            <p class="text-muted small mb-0">Daftar seluruh usulan</p>
                         </label>
 
                         <div class="card-tools">
-                            <a href="" class="btn btn-default btn-sm text-dark" data-toggle="modal" data-target="#modalFilter">
-                                <i class="fas fa-filter"></i> Filter
+                            <a href="" class="btn btn-outline-secondary btn-sm px-4 rounded-pill shadow-sm" data-toggle="modal" data-target="#modalFilter">
+                                <i class="fas fa-filter mr-1"></i> Filter Data
                             </a>
                         </div>
                     </div>
@@ -76,23 +79,25 @@
     </div>
 </section>
 
-<!-- Modal Filter -->
-<div class="modal fade" id="modalFilter" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-filter"></i> Filter</h5>
+<div class="modal fade" id="modalFilter" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content custom-card-bbm">
+            <div class="modal-header card-header-bbm">
+                <h5 class="modal-title font-weight-bold">
+                    <i class="fas fa-filter text-secondary mr-2"></i> Filter Data AADB
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="GET" action="{{ route('usulan', $form->kode_form) }}">
+
+            <form action="{{ route('usulan', $form->kode_form) }}" method="GET">
                 @csrf
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Unit Kerja</label>
-                        <select id="uker" name="uker" class="form-control" style="width: 100%;">
-                            <option value="">-- Pilih Unit Kerja --</option>
+                <div class="modal-body p-4">
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Unit Kerja</label>
+                        <select name="filter_unit" class="form-control select2 shadow-sm">
+                            <option value="">Semua Unit Kerja</option>
                             @foreach ($listUker as $row)
                             <option value="{{ $row->id_unit_kerja }}" <?php echo $row->id_unit_kerja == $uker ? 'selected' : ''; ?>>
                                 {{ $row->unit_kerja }}
@@ -101,10 +106,10 @@
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Bulan</label>
-                        <select name="bulan" class="form-control border-dark rounded">
-                            <option value="">Semua Bulan</option>
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Bulan</label>
+                        <select name="bulan" class="form-control shadow-sm">
+                            <option value="">Semua Kategori</option>
                             @foreach(range(1, 12) as $monthNumber)
                             @php $rowBulan = Carbon\Carbon::create()->month($monthNumber); @endphp
                             <option value="{{ $rowBulan->isoFormat('MM') }}" <?php echo $bulan == $rowBulan->isoFormat('M') ? 'selected' : '' ?>>
@@ -113,10 +118,11 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Tahun</label>
-                        <select name="tahun" class="form-control border-dark rounded">
-                            <option value="">Semua Tahun</option>
+
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Tahun</label>
+                        <select name="tahun" class="form-control shadow-sm">
+                            <option value="">Semua Unit Kerja</option>
                             @foreach(range(2025,2026) as $yearNumber)
                             @php $rowTahun = Carbon\Carbon::create()->year($yearNumber); @endphp
                             <option value="{{ $rowTahun->isoFormat('Y') }}" <?php echo $tahun == $rowTahun->isoFormat('Y') ? 'selected' : '' ?>>
@@ -125,11 +131,11 @@
                             @endforeach
                         </select>
                     </div>
-
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Status</label>
-                        <select name="status" class="form-control">
-                            <option value="">Seluruh Status</option>
+                    
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Status</label>
+                        <select name="status" class="form-control shadow-sm">
+                            <option value="">Semua Status</option>
                             <option value="verif" <?php echo $status == 'verif' ? 'selected' : ''; ?>>Persetujuan</option>
                             <option value="proses" <?php echo $status == 'proses' ? 'selected' : ''; ?>>Proses</option>
                             <option value="selesai" <?php echo $status == 'selesai' ? 'selected' : ''; ?>>Selesai</option>
@@ -137,16 +143,17 @@
                         </select>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="{{ route('usulan', $form->kode_form) }}" class="btn btn-danger btn-sm">
-                        <i class="fas fa-undo"></i> Muat
-                    </a>
-                    <button class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Cari</button>
+
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-primary px-4 shadow rounded-pill">
+                        <i class="fas fa-search mr-2"></i> Tampilkan Hasil
+                    </button>
                 </div>
             </form>
         </div>
     </div>
-</div>\
+</div>
 
 @section('js')
 <script>
@@ -182,14 +189,14 @@
 
 <script>
     $(document).ready(function() {
-        let userId  = '{{ auth()->user()->id }}';
-        let role    = '{{ auth()->user()->role_id }}';
-        let form    = '{{ $form->kode_form }}';
-        let formId  = '{{ $formId }}';
-        let bulan   = $('[name="bulan"]').val();
-        let tahun   = $('[name="tahun"]').val();
-        let uker    = $('[name="uker"]').val();
-        let status  = $('[name="status"]').val();
+        let userId = '{{ auth()->user()->id }}';
+        let role = '{{ auth()->user()->role_id }}';
+        let form = '{{ $form->kode_form }}';
+        let formId = '{{ $formId }}';
+        let bulan = $('[name="bulan"]').val();
+        let tahun = $('[name="tahun"]').val();
+        let uker = $('[name="uker"]').val();
+        let status = $('[name="status"]').val();
 
         loadTable(formId, bulan, tahun, uker, status);
 
@@ -249,31 +256,31 @@
                             "paging": true,
                             "searching": true,
                             buttons: [{
-                                extend: 'pdf',
-                                text: ' PDF',
-                                pageSize: 'A4',
-                                className: 'bg-danger',
-                                title: 'kegiatan',
-                                exportOptions: {
-                                    columns: [0, 2, 3, 4],
+                                    extend: 'pdf',
+                                    text: ' PDF',
+                                    pageSize: 'A4',
+                                    className: 'bg-danger',
+                                    title: 'kegiatan',
+                                    exportOptions: {
+                                        columns: [0, 2, 3, 4],
+                                    },
+                                }, {
+                                    extend: 'excel',
+                                    text: ' Excel',
+                                    className: 'bg-success',
+                                    title: 'kegiatan',
+                                    exportOptions: {
+                                        columns: [0, 2, 3, 4, 5, 6, 7, 8],
+                                    },
                                 },
-                            }, {
-                                extend: 'excel',
-                                text: ' Excel',
-                                className: 'bg-success',
-                                title: 'kegiatan',
-                                exportOptions: {
-                                    columns: [0, 2, 3, 4, 5, 6, 7, 8],
-                                },
-                            },
-                            ((role == 4 || userId == 25) && form != 'atk' && form != 'bmhp' ? [{
-                                text: ' Tambah',
-                                className: 'bg-primary',
-                                action: function(e, dt, button, config) {
-                                    window.location.href = `{{ route('usulan.create', ':form') }}`.replace(':form', form)
-                                }
-                            }] : []),
-                        ],
+                                ((role == 4 || userId == 25) && form != 'atk' && form != 'bmhp' ? [{
+                                    text: ' Tambah',
+                                    className: 'bg-primary',
+                                    action: function(e, dt, button, config) {
+                                        window.location.href = `{{ route('usulan.create', ':form') }}`.replace(':form', form)
+                                    }
+                                }] : []),
+                            ],
                             "bDestroy": true
                         }).buttons().container().appendTo('#table-data_wrapper .col-md-6:eq(0)');
                     }

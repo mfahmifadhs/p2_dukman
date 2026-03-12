@@ -2,201 +2,219 @@
 <html lang="en">
 
 <head>
-    <title>SIPORSAT KEMENKES RI</title>
-    <meta charset="UTF-8">
-    <meta name="description" content="Siporsat Kemenkes RI">
-    <meta name="keywords" content="Siporsat Kemenkes RI">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Icon Title -->
-    <link rel="icon" type="image/png" href="{{ asset('dist/img/logo-kemenkes-icon.png') }}">
+    <meta charset="utf-8">
+    <title>DITJEN P2</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Space+Grotesk&display=swap" rel="stylesheet">
 
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Owl Carousel -->
-    <link rel="stylesheet" href="{{ asset('dist/css/owl.carousel.css') }}" />
-    <!-- Main -->
-    <link rel="stylesheet" href="{{ asset('dist/css/main.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+    <link href="{{ asset('dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/owl.carousel.css') }}" rel="stylesheet">
+    <link href="{{ asset('dist/css/style.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
-    <!-- Page Preloder -->
-    <div id="preloder">
-        <div class="loader"></div>
+
+
+    <!-- NAVBAR -->
+
+    <div class="container-fluid sticky-top bg-white">
+        <div class="container">
+
+            <nav class="navbar navbar-expand-lg navbar-light">
+
+                <a href="#" class="navbar-brand">
+                    <img src="{{ asset('dist/img/logo-p2.png') }}" height="45">
+                </a>
+
+                <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+
+                    <div class="navbar-nav ms-auto">
+
+                        <a href="#" class="nav-item nav-link active">Home</a>
+                        <a href="#" class="nav-item nav-link">About</a>
+                        <a href="#" class="nav-item nav-link">Services</a>
+                        <a href="#" class="nav-item nav-link">Projects</a>
+
+                        <div class="nav-item dropdown">
+
+                            <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Pages</a>
+
+                            <div class="dropdown-menu">
+
+                                <a href="#" class="dropdown-item">Features</a>
+                                <a href="#" class="dropdown-item">Our Team</a>
+                                <a href="#" class="dropdown-item">Testimonial</a>
+
+                            </div>
+
+                        </div>
+
+                        <a href="#" class="nav-item nav-link">Contact</a>
+
+                    </div>
+                </div>
+
+            </nav>
+
+        </div>
     </div>
 
-    <!-- Header section -->
-    <header class="header-section clearfix">
-        <div class="container-fluid">
-            <a href="index.html" class="site-logo">
-                <img src="{{ asset('dist/img/biro-umum.png') }}" width="400" height="120" alt="">
-            </a>
-        </div>
-    </header>
-    <!-- Header section end -->
 
+    <!-- HERO -->
 
-    <!-- Hero section -->
-    <section class="hero-section">
+    <div class="container-fluid hero-header">
+
         <div class="container">
-            <div class="row">
-                <div class="col-md-6 hero-text">
-                    <h2 class="mb-1">SIPORSAT</h2>
-                    <h4><small>
-                            Sistem Informasi Pengelolaan Operasional Perkantoran Terpusat <br class="mb-4">
-                            Biro Umum Kementerian Kesehatan Republik Indonesia
-                        </small></h4>
-                    <a href="{{ url('login') }}" class="site-btn sb-gradients mt-4">Masuk</a>
+
+            <div class="row g-4 align-items-center">
+
+                <!-- TEXT -->
+
+                <div class="col-lg-6">
+
+                    <h1 class="hero-title animated slideInRight">
+                        Sistem Manajemen <span class="text-primary">Opersional Perkantoran</span>
+                    </h1>
+
+                    <div class="mt-4">
+                        <a href="{{ route('login') }}" class="btn-login">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Login Sistem
+                        </a>
+                    </div>
+
                 </div>
-                <div class="col-md-6">
-                    <img src="{{ asset('dist/img/tentang.png') }}" class="laptop-image" alt="">
+
+
+                <!-- IMAGE SLIDER -->
+
+                <div class="col-lg-6">
+
+                    <div class="owl-carousel header-carousel animated fadeIn">
+
+                        <img class="img-fluid" src="{{ asset('dist/img/main/hero-slider-1.jpg') }}">
+
+                        <img class="img-fluid" src="{{ asset('dist/img/main/hero-slider-2.jpg') }}">
+
+                        <img class="img-fluid" src="{{ asset('dist/img/main/hero-slider-3.jpg') }}">
+
+                    </div>
+
                 </div>
+
             </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="row g-3 mt-4">
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="feature-box">
+
+                        <div class="btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+
+                        <h6 class="mb-0">Crafted Furniture</h6>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="feature-box">
+
+                        <div class="btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+
+                        <h6 class="mb-0">Sustainable Material</h6>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="feature-box">
+
+                        <div class="btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+
+                        <h6 class="mb-0">Innovative Architects</h6>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-6 col-lg-3">
+
+                    <div class="feature-box">
+
+                        <div class="btn-square border border-2 border-white me-3">
+                            <i class="fa fa-robot text-primary"></i>
+                        </div>
+
+                        <h6 class="mb-0">Budget Friendly</h6>
+
+                    </div>
+
+                </div>
+
+            </div>
+
         </div>
-    </section>
-    <!-- Hero section end -->
+
+    </div>
 
 
-    <!-- About section -->
-    <section class="about-section spad mb-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-6 offset-lg-6 about-text">
-                    <h2>SIPORSAT</h2>
-                    <h5>Sistem Informasi Pengelolaan Operasional Perkantoran Terpusat</h5>
-                    <p>SIPORSAT merupakan aplikasi yang dikembangkan oleh unit kerja Biro Umum Kemenkes RI, untuk membantu
-                        dalam pengelolaan operasional perkantoran secara terpusat meliputi pengadaan maupun pemeliharaan barang.
-                        Dengan SIPORSAT, membantu dalam proses pengajuan usulan pengeadaan dan pemeliharaan barang.</p>
-                </div>
-                <div class="about-img col-lg-6">
-                    <img src="{{ asset('dist/img/tentang.png') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- About section end -->
+    <!-- BACK TO TOP -->
+
+    <a href="#" class="btn btn-primary btn-lg-square back-to-top">
+        <i class="bi bi-arrow-up"></i>
+    </a>
 
 
-    <!-- Features section -->
-    <section class="features-section spad gradient-bg ">
-        <div class="container text-white">
-            <!-- <div class="section-title text-center">
-                <h2>Our Features</h2>
-                <p>Bitcoin is the simplest way to exchange money at very low cost.</p>
-            </div> -->
-            <div class="row">
-                <!-- feature -->
-                <div class="col-md-6 col-lg-6 feature">
-                    <i class="fas fa-laptop-house"></i>
-                    <div class="feature-content">
-                        <h4 class="mt-4">Olah Data BMN & Meubelair</h4>
-                        <!-- <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
-                        <!-- <a href="" class="readmore">Readmore</a> -->
-                    </div>
-                </div>
-                <!-- feature -->
-                <div class="col-md-6 col-lg-6 feature">
-                    <i class="fas fa-car"></i>
-                    <div class="feature-content">
-                        <h4 class="mt-4">Alat Angkutan Darat Bermotor</h4>
-                        <!-- <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
-                        <!-- <a href="" class="readmore">Readmore</a> -->
-                    </div>
-                </div>
-                <!-- feature -->
-                <div class="col-md-6 col-lg-4 feature">
-                    <i class="fas fa-city"></i>
-                    <div class="feature-content">
-                        <h4 class="mt-4">Alat Tulis Kantor</h4>
-                        <!-- <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
-                        <!-- <a href="" class="readmore">Readmore</a> -->
-                    </div>
-                </div>
-                <!-- feature -->
-                <div class="col-md-6 col-lg-4 feature">
-                    <i class="fas fa-city"></i>
-                    <div class="feature-content">
-                        <h4 class="mt-4">Pemeliharaan Gedung</h4>
-                        <!-- <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
-                        <!-- <a href="" class="readmore">Readmore</a> -->
-                    </div>
-                </div>
-                <!-- feature -->
-                <div class="col-md-6 col-lg-4 feature">
-                    <i class="fas fa-house-user"></i>
-                    <div class="feature-content">
-                        <h4 class="mt-4">Rumah Dinas Negara</h4>
-                        <!-- <p>Excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id est laborum. </p> -->
-                        <!-- <a href="" class="readmore">Readmore</a> -->
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Features section end -->
+    <!-- JS -->
 
-    <!-- Footer section -->
-    <footer class="footer-section">
-        <div class="container">
-            <div class="row spad">
-                <div class="col-md-8 col-lg-12 footer-widget text-center">
-                    <img src="{{ asset('dist/img/biro-umum.png') }}" width="350" height="120" alt="">
-                    <p><i>
-                            Jl. H.R. Rasuna Said Blok X.5 Kav. 4-9, Jakarta 12950 <br>
-                            Telepon : (021) 5201590</i>
-                    </p>
-                    <span>
-                        Sistem Informasi Pengelolaan Operasional Perkantoran Terpusat Kemenkes RI
-                    </span>
-                </div>
-                <div class="col-md-6 col-lg-12 footer-widget pl-lg-5 pl-3 text-center mt-4">
-                    <div class="social">
-                        <a href="https://www.facebook.com/KementerianKesehatanRI/" class="facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="https://www.instagram.com/kemenkes_ri/" class="instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="https://twitter.com/kemenkesri" class="twitter"><i class="fab fa-twitter"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <div class="row">
-                    <div class="col-lg-6 store-links text-center text-lg-left pb-3 pb-lg-0">
-                        Copyright &copy;<script>
-                            document.write(new Date().getFullYear());
-                        </script> All rights reserved | Biro Umum Kemenkes
-                    </div>
-                    <div class="col-lg-6 text-center text-lg-right">
-                        <ul class="footer-nav">
-                            <li><a href="#">www.roum.kemkes.go.id</a></li>
-                            <li><a href="#">roum@kemkes.go.id</a></li>
-                            <li><a href="#">(021) 511392872</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
 
+    <script src="{{ asset('dist/js/wow.js') }}"></script>
+    <script src="{{ asset('dist/js/owl.carousel.js') }}"></script>
 
-    <!--====== Javascripts & Jquery ======-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="{{ asset('dist/js/owl.carousel.min.js') }}"></script>
-    <script src="{{ asset('dist/js/main.js') }}"></script>
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-LWFXY0HY62"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
+        $(document).ready(function() {
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
+            $(".header-carousel").owlCarousel({
 
-        gtag('config', 'G-LWFXY0HY62');
+                items: 1,
+                loop: true,
+                autoplay: true,
+                autoplayTimeout: 3000,
+                smartSpeed: 1000
+
+            });
+
+        });
     </script>
+
 </body>
 
 </html>

@@ -4,64 +4,49 @@
 
 <div class="content-header">
     <div class="container-fluid">
-        <div class="row mb-2">
+        <div class="row mb-3 mt-3">
             <div class="col-sm-12">
-                <h4 class="m-0">Daftar AADB</h4>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}"> Dashboard</a></li>
-                    <li class="breadcrumb-item active">Daftar</li>
+                <h3 class="m-0 font-weight-bold text-dark">Daftar Kendaraan (AADB)</h3>
+                <ol class="breadcrumb mt-2">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                    <li class="breadcrumb-item active">Daftar AADB</li>
                 </ol>
-
             </div>
         </div>
     </div>
 </div>
 
-
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-12 form-group">
-                <div class="card card-primary">
-                    <div class="card-header">
-                        <label class="card-title">
-                            Daftar AADB
-                        </label>
-
-                        <div class="card-tools">
-                            <a href="" class="btn btn-default btn-sm text-dark" data-toggle="modal" data-target="#modalFilter">
-                                <i class="fas fa-filter"></i> Filter
-                            </a>
+            <div class="col-md-12">
+                <div class="card custom-card-bbm shadow-sm">
+                    <div class="card-header-bbm d-flex justify-content-between align-items-center p-4">
+                        <div>
+                            <h4 class="font-weight-bold mb-1">Data Inventaris Kendaraan</h4>
+                            <p class="text-muted small mb-0">Kelola dan pantau seluruh aset kendaraan operasional</p>
                         </div>
+                        <button class="btn btn-outline-secondary btn-sm px-4 rounded-pill shadow-sm" data-toggle="modal" data-target="#modalFilter">
+                            <i class="fas fa-filter mr-1"></i> Filter Data
+                        </button>
                     </div>
-                    <div class="table-responsive">
-                        <div class="card-body">
-                            <table id="table-data" class="table table-bordered text-xs text-center">
-                                <thead class="text-uppercase text-center">
+
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table id="table-data" class="table table-modern w-100">
+                                <thead>
                                     <tr>
-                                        <th style="width: 0%;">No</th>
-                                        <th style="width: auto;">Aksi</th>
-                                        <th style="width: auto;">Unit Kerja</th>
-                                        <th style="width: auto;">Jenis</th>
-                                        <th style="width: auto;">Kendaraan</th>
-                                        <th style="width: auto;">Merk/Tipe</th>
-                                        <th style="width: auto;">Kualifikasi</th>
-                                        <th style="width: auto;">No.Polisi</th>
-                                        <th style="width: auto;">Tanggal</th>
-                                        <th style="width: auto;">Nilai</th>
-                                        <th style="width: auto;">Kondisi</th>
+                                        <th>NO</th>
+                                        <th>AKSI</th>
+                                        <th class="text-left">UNIT KERJA</th>
+                                        <th class="text-left">MERK/TIPE</th>
+                                        <th>NO. POLISI</th>
+                                        <th>ALOKASI</th>
+                                        <th>REALISASI</th>
+                                        <th>KONDISI</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if ($data == 0)
-                                    <tr class="text-center">
-                                        <td colspan="13">Tidak ada data</td>
-                                    </tr>
-                                    @else
-                                    <tr>
-                                        <td colspan="13">Sedang mengambil data ...</td>
-                                    </tr>
-                                    @endif
                                 </tbody>
                             </table>
                         </div>
@@ -73,71 +58,60 @@
 </section>
 
 <!-- Modal Filter -->
-<div class="modal fade" id="modalFilter" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"><i class="fas fa-filter"></i> Filter</h5>
+<div class="modal fade" id="modalFilter" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content custom-card-bbm">
+            <div class="modal-header card-header-bbm">
+                <h5 class="modal-title font-weight-bold">
+                    <i class="fas fa-filter text-secondary mr-2"></i> Filter Data AADB
+                </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form method="GET" action="{{ route('aadb') }}">
-                @csrf
-                <div class="modal-body">
 
-                    @if (Auth::user()->role_id != 4)
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Unit Kerja</label>
-                        <select id="uker" name="uker" class="form-control" style="width: 100%;">
-                            <option value="">-- Pilih Unit Kerja --</option>
-                            @foreach ($listUker as $row)
-                            <option value="{{ $row->id_unit_kerja }}" <?php echo $row->id_unit_kerja == $uker ? 'selected' : ''; ?>>
-                                {{ $row->unit_kerja }}
-                            </option>
-                            @endforeach
-                        </select>
-                    </div>
-                    @endif
-
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Kategori</label>
-                        <select name="kategori" class="form-control">
-                            <option value="">-- Pilih Kategori --</option>
-                            @foreach ($listKategori as $row)
-                            <option value="{{ $row->id_kategori }}" <?php echo $row->id_kategori == $kategori ? 'selected' : ''; ?>>
-                                {{ $row->nama_kategori }}
-                            </option>
-                            @endforeach
+            <form action="" method="GET">
+                <div class="modal-body p-4">
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Unit Kerja</label>
+                        <select name="filter_unit" class="form-control select2 shadow-sm">
+                            <option value="">Semua Unit Kerja</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Kondisi</label>
-                        <select name="kondisi" class="form-control">
-                            <option value="">-- Pilih Kondisi --</option>
-                            @foreach ($listKondisi as $row)
-                            <option value="{{ $row->id_kondisi }}" <?php echo $row->id_kondisi == $kondisi ? 'selected' : ''; ?>>
-                                {{ $row->nama_kondisi }}
-                            </option>
-                            @endforeach
+                    <div class="form-group mb-4">
+                        <label class="font-weight-bold small text-uppercase text-muted">Kategori Kendaraan</label>
+                        <select name="filter_kategori" class="form-control select2 shadow-sm">
+                            <option value="">Semua Kategori</option>
+                            <option value="1">Kendaraan Jabatan</option>
+                            <option value="2">Kendaraan Operasional</option>
                         </select>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-form-label">Pilih Status</label>
-                        <select name="status" class="form-control">
-                            <option value="">-- Pilih Status --</option>
-                            <option value="true" <?php echo $status == 'true' ? 'selected' : ''; ?>>True</option>
-                            <option value="false" <?php echo $status == 'false' ? 'selected' : ''; ?>>False</option>
-                        </select>
+                    <div class="form-group mb-2">
+                        <label class="font-weight-bold small text-uppercase text-muted">Kondisi</label>
+                        <div class="d-flex justify-content-between">
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="kondisi1" name="filter_kondisi" value="Baik" checked>
+                                <label for="kondisi1" class="custom-control-label">Baik</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="kondisi2" name="filter_kondisi" value="Rusak Ringan">
+                                <label for="kondisi2" class="custom-control-label">Rusak Ringan</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input class="custom-control-input" type="radio" id="kondisi3" name="filter_kondisi" value="Rusak Berat">
+                                <label for="kondisi3" class="custom-control-label">Rusak Berat</label>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <a href="{{ route('aadb') }}" class="btn btn-danger btn-sm">
-                        <i class="fas fa-undo"></i> Muat
-                    </a>
-                    <button class="btn btn-primary btn-sm"><i class="fas fa-search"></i> Cari</button>
+
+                <div class="modal-footer border-0 p-4">
+                    <button type="button" class="btn btn-link text-muted" data-dismiss="modal">Batalkan</button>
+                    <button type="submit" class="btn btn-primary px-4 shadow rounded-pill">
+                        <i class="fas fa-search mr-2"></i> Tampilkan Hasil
+                    </button>
                 </div>
             </form>
         </div>
@@ -251,10 +225,10 @@
 
 <script>
     $(document).ready(function() {
-        let uker     = $('[name="uker"]').val();
+        let uker = $('[name="uker"]').val();
         let kategori = $('[name="kategori"]').val();
-        let status   = $('[name="status"]').val();
-        let kondisi  = $('[name="kondisi"]').val();
+        let status = $('[name="status"]').val();
+        let kondisi = $('[name="kondisi"]').val();
         let userRole = '{{ Auth::user()->role_id }}';
 
         loadTable(uker, kategori, status, kondisi);
@@ -296,13 +270,10 @@
                                     <td class="align-middle">${item.no} ${item.status}</td>
                                     <td class="align-middle">${item.aksi}</td>
                                     <td class="align-middle text-left">${item.uker}</td>
-                                    <td class="align-middle">${item.jenis}</td>
-                                    <td class="align-middle text-left">${item.kategori}</td>
-                                    <td class="align-middle text-left">${item.merktipe}</td>
-                                    <td class="align-middle">${item.kualifikasi}</td>
+                                    <td class="align-middle">${item.merktipe}</td>
                                     <td class="align-middle">${item.nopolisi}</td>
-                                    <td class="align-middle">${item.tanggal}</td>
-                                    <td class="align-middle text-left">${item.nilai}</td>
+                                    <td class="align-middle">${item.alokasi}</td>
+                                    <td class="align-middle">${item.realisasi}</td>
                                     <td class="align-middle">${item.kondisi}</td>
                                 </tr>
                             `);

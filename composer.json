@@ -11,6 +11,7 @@
         "endroid/qr-code": "^6.0",
         "laravel/framework": "^11.0",
         "laravel/tinker": "^2.10.1",
+        "mpdf/mpdf": "^8.3",
         "setasign/fpdf": "^1.8",
         "setasign/fpdi": "^2.6"
     },

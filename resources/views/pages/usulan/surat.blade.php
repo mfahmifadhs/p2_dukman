@@ -1,302 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIPORSAT KEMENKES RI</title>
-
-    <!-- Icon Title -->
-    <link rel="icon" type="image/png" href="{{ asset('dist/img/logo-kemenkes-icon.png') }}">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <!-- Bootstrap -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="{{ asset('dist/css/adminlte.css') }}">
 
     <style>
         body {
-            font-family: Arial;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
         }
 
-        @media print {
+        .header img {
+            width: 100%;
+            background-color: blue;
+        }
 
-            .table-container {
-                page-break-before: auto;
-                page-break-inside: auto;
-            }
+        .title {
+            text-align: center;
+            margin-top: 10px;
+        }
 
-            .footer-container {
-                page-break-inside: avoid;
-            }
+        .title h2 {
+            margin: 0;
+        }
 
-            .footer-container .row {
-                page-break-inside: avoid;
-            }
+        .title h3 {
+            margin: 0;
+            font-weight: normal;
+        }
 
-            .footer-container h3,
-            .footer-container img {
-                page-break-inside: avoid;
-            }
+        .info {
+            margin-top: 25px;
+        }
 
-            table {
-                page-break-before: auto;
-                page-break-inside: auto;
-                border-collapse: collapse;
-                width: 100%;
-            }
+        .info table {
+            width: 100%;
+        }
 
-            thead {
-                display: table-header-group;
-                border: 2px solid;
-            }
+        .info td {
+            vertical-align: top;
+            padding: 2px;
+        }
 
-            tbody {
-                display: table-row-group;
-                border: 2px solid;
-            }
+        .line {
+            border-top: 3px solid black;
+            margin-top: 10px;
+            margin-bottom: 15px;
+        }
 
-            tr {
-                page-break-inside: auto;
-                border: 2px solid;
-            }
+        table.table {
+            width: 100%;
+            border-collapse: collapse;
+        }
 
-            thead .th {
-                border: 2px solid !important;
-            }
+        table.table th,
+        table.table td {
+            border: 1px solid black;
+            padding: 6px;
+        }
 
-            tbody .td {
-                border: 2px solid !important;
-            }
+        table.table th {
+            text-align: center;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .ttd {
+            margin-top: 40px;
+        }
+
+        .ttd-table {
+            width: 100%;
+        }
+
+        .ttd-table td {
+            width: 50%;
+            vertical-align: top;
+        }
+
+        .qr {
+            margin-top: 12px;
+            margin-bottom: 12px;
+        }
+
+        .qr img {
+            width: 80px;
         }
     </style>
 </head>
 
 <body>
-    <div class="card mx-5">
-        <div class="card-body">
-            <img src="{{ asset('dist/img/header-'.$data->pegawai->uker->utama_id.'.png') }}" alt="">
-        </div>
-        <div class="card-body no-break">
-            <div class="text-center text-uppercase">
-                <h3><b>{{ $data->form_id == 3 ? 'Berita Acara Serah Terima' : 'Surat Usulan' }}</b></h3>
-                <h4>Nomor : {{ $data->nomor_usulan }}</h4>
-            </div>
-        </div>
-        <div class="card-body h3 no-break">
-            <div class="row">
-                <div class="col-8">
-                    <div class="row">
-                        <div class="col-3">Hal</div>
-                        <div class="col-8">: {{ $data->form->nama_form }}</div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    {{ Carbon\Carbon::parse($data->tanggal_usulan)->isoFormat('DD MMMM Y') }}
-                </div>
-            </div>
-            <div class="row mt-3 ls-base">
-                <div class="col-2">Nama</div>
-                <div class="col-9">: {{ $data->pegawai->nama_pegawai }}</div>
-                <div class="col-2">Jabatan</div>
-                <div class="col-9">: {{ $data->pegawai->jabatan->jabatan }} {{ $data->pegawai->tim_kerja }}</div>
-                <div class="col-2">Unit Kerja</div>
-                <div class="col-9">: {{ $data->pegawai->uker->unit_kerja }} | {{ $data->pegawai->uker->utama->unit_utama }}</div>
-            </div>
-        </div>
-        <!-- ========================= UKT & GDN ============================ -->
-        @if (in_array($data->form_id, [1,2]))
-        <div class="card-body">
-            <div class="table-container">
-                <table class="table table-bordered border border-dark">
-                    <thead class="h4 text-center">
-                        <tr>
-                            <th class="th" style="width: 5%;">No</th>
-                            <th class="th" style="width: 30%;">Judul</th>
-                            <th class="th">Uraian</th>
-                            <th class="th" style="width: 20%;">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody class="h4">
-                        @foreach ($data->detail as $row)
-                        <tr class="bg-white">
-                            <td class="text-center td">{{ $loop->iteration }}</td>
-                            <td class="td">{{ $row->gdn ? $row->gdn->nama_perbaikan .',' : '' }} {!! $row->judul !!}</td>
-                            <td class="td">{!! nl2br($row->uraian) !!}</td>
-                            <td class="td">{!! nl2br($row->keterangan) !!}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @endif
 
-        <!-- ========================== ATK ================================= -->
-            @if (in_array($data->form_id, [3,6]))
-        <div class="card-body h4" style="overflow-y: auto; max-height: 50vh;">
-            <label>Uraian Permintaan</label>
-            <div class="table-responsive">
-                <table id="table" class="table table-bordered border border-dark h4">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="th">No</th>
-                            <th class="th">Nama Barang</th>
-                            <th class="th">Deskripsi</th>
-                            <th class="th">Keterangan</th>
-                            <th class="th">Jumlah</th>
-                        </tr>
-                    </thead>
-                    @if ($data->form_id == 3)
-                    <tbody>
-                        @foreach ($data->detailAtk as $row)
-                        <tr class="bg-white">
-                            <td class="td text-center">{{ $loop->iteration }}</td>
-                            <td class="td">{{ $row->atk->nama_barang }}</td>
-                            <td class="td">{{ $row->atk->deskripsi }}</td>
-                            <td class="td">{{ $row->keterangan }}</td>
-                            <td class="td text-center">{{ $row->jumlah.' '.$row->satuan->nama_satuan }} </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @endif
+    <div class="header">
+        <img src="{{ public_path('dist/img/header-'.$data->pegawai->uker->utama_id.'.png') }}">
+    </div>
 
-                    @if ($data->form_id == 6)
-                    <tbody>
-                        @foreach ($data->detailBmhp as $row)
-                        <tr class="bg-white">
-                            <td class="td text-center">{{ $loop->iteration }}</td>
-                            <td class="td">{{ $row->bmhp->nama_barang }}</td>
-                            <td class="td">{{ $row->bmhp->deskripsi }}</td>
-                            <td class="td text-center">{{ $row->jumlah.' '.$row->satuan->nama_satuan }} </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                    @endif
-                </table>
-            </div>
-        </div>
-        @endif
+    <div class="title">
+        <h2>NOTA DINAS</h2>
+        <h3>Nomor {{ $data->nomor_usulan }}</h3>
+    </div>
 
-        <!-- ========================== AADB SERVIS ================================= -->
-        @if ($data->form_id == 4)
-        <div class="card-body h4" style="overflow-y: auto; max-height: 50vh;">
-            <label>Uraian Pemeliharaan</label>
-            <div class="table-responsive">
-                <table id="table" class="table table-bordered border border-dark h4">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="th">No</th>
-                            <th class="th">Nama Kendaraan</th>
-                            <th class="th">Uraian</th>
-                            <th class="th">Keterangan</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data->detailServis as $row)
-                        <tr class="bg-white">
-                            <td class="td text-center">{{ $loop->iteration }}</td>
-                            <td class="td">{{ $row->aadb->no_polisi ? $row->aadb->no_polisi .' - ' : '' }} {{ $row->aadb->merk_tipe }}</td>
-                            <td class="td">{!! nl2br($row->uraian) !!}</td>
-                            <td class="td">{!! nl2br($row->keterangan) !!}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @endif
+    <div class="info">
+        <table>
 
-        <!-- ========================== AADB BBM ================================= -->
-        @if ($data->form_id == 5)
-        <div class="card-body h4" style="overflow-y: auto; max-height: 50vh;">
-            <label>Uraian Permintaan BBM <u>{{ Carbon\Carbon::parse($data->tanggal_selesai)->isoFormat('MMMM Y') }}</u></label>
-            <div class="table-responsive">
-                <table id="table" class="table table-bordered border border-dark h4">
-                    <thead class="text-center">
-                        <tr>
-                            <th class="th">No</th>
-                            <th class="th">No. Polisi</th>
-                            <th class="th">Kendaraan</th>
-                            <th class="th">Merk/Tipe</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($data->detailBbm as $row)
-                        <tr class="bg-white">
-                            <td class="td text-center">{{ $loop->iteration }}</td>
-                            <td class="td">{{ $row->aadb->no_polisi }}</td>
-                            <td class="td">{{ $row->aadb->kategori->nama_kategori }}</td>
-                            <td class="td">{{ $row->aadb->merk_tipe }}</td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        @endif
+            <tr>
+                <td width="80">Yth.</td>
+                <td>: Ketua Tim Kerja Dukungan Manajemen Setditjen P2</td>
+            </tr>
 
-        <div class="card-body">
-            <div class="footer-container">
-                <div class="row">
-                    <div class="col-md-12 mb-5">
-                        <h3 class="lh-base">
-                            Demikian {{ $data->form_id == 3 ? 'berita acara serah terima' : 'surat usulan' }}
-                            ini kami sampaikan. Atas perhatian dan kerjasamanya diucapkan terima kasih
-                        </h3>
+            <tr>
+                <td>Dari</td>
+                <td>: {{ $data->pegawai->jabatan->jabatan }} {{ $data->pegawai->tim_kerja }} {{ $data->pegawai->uker->unit_kerja }}</td>
+            </tr>
+
+            <tr>
+                <td>Hal</td>
+                <td>: Permintaan {{ $data->form->nama_form }}</td>
+            </tr>
+
+            <tr>
+                <td>Tanggal</td>
+                <td>: {{ Carbon\Carbon::parse($data->tanggal_usulan)->isoFormat('DD MMMM Y') }}</td>
+            </tr>
+
+        </table>
+    </div>
+
+    <div class="line"></div>
+
+    <p style="text-align:justify">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Sehubungan dengan kebutuhan Alat Tulis Kantor (ATK)
+        {{ $data->pegawai->tim_kerja.' '.$data->pegawai->uker->unit_kerja }},
+        bersama ini kami sampaikan permintaan sebagai berikut.
+    </p>
+
+
+    @if (in_array($data->form_id,[3,6]))
+
+    <table class="table">
+
+        <thead>
+            <tr>
+                <th width="5%">No</th>
+                <th>Nama Barang</th>
+                <th>Keterangan</th>
+                <th width="15%">Jumlah</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            @if ($data->form_id == 3)
+
+            @foreach ($data->detailAtk as $row)
+            <tr>
+                <td class="center">{{ $loop->iteration }}</td>
+                <td>{{ $row->atk->nama_barang }}</td>
+                <td>{{ $row->keterangan }}</td>
+                <td class="center">{{ $row->jumlah }} {{ $row->satuan->nama_satuan }}</td>
+            </tr>
+            @endforeach
+
+            @endif
+
+
+            @if ($data->form_id == 6)
+
+            @foreach ($data->detailBmhp as $row)
+            <tr>
+                <td class="center">{{ $loop->iteration }}</td>
+                <td>{{ $row->bmhp->nama_barang }}</td>
+                <td>{{ $row->keterangan }}</td>
+                <td class="center">{{ $row->jumlah }} {{ $row->satuan->nama_satuan }}</td>
+            </tr>
+            @endforeach
+
+            @endif
+
+        </tbody>
+    </table>
+
+    @endif
+
+
+    <p style="margin-top:15px">
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        Atas perhatian dan bantuan Saudara, diucapkan terima kasih.
+    </p>
+
+
+    <div class="ttd">
+
+        <table class="ttd-table">
+
+            <tr>
+
+                <td>
+
+                    <p>Pengusul,</p>
+                    <p>{{ $data->pegawai->jabatan->jabatan.' '.$data->pegawai->tim_kerja }} <br> {{ $data->pegawai->uker->unit_kerja }}</p>
+
+                    <div class="qr">
+                        <img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_1 .'/'. $data->kode_usulan) }}" width="80" style="padding: 10vh 0;">
                     </div>
-                    @if ($data->status_persetujuan == 'true')
-                    <div class="col-5">
-                        <h3>Disetujui oleh,</h3>
-                        <h3>{{ $data->verif->jabatan->jabatan }} {{ $data->verif->tim_kerja }}</h3>
-                        <h3 class="my-3"><img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_2 .'/'. $data->kode_usulan) }}" width="150" alt="QR Code"></h3>
-                        <h3>{{ $data->verif->nama_pegawai }}</h3>
+
+                    <p>{{ $data->pegawai->nama_pegawai }}</p>
+
+                </td>
+
+
+                @if ($data->status_persetujuan == 'true')
+
+                <td>
+                    <p>Disetujui,</p>
+                    <p>{{ $data->verif->jabatan->jabatan.' '.$data->verif->tim_kerja }} <br> Setditjen P2</p>
+
+                    <div class="qr">
+                        <img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_2 .'/'. $data->kode_usulan) }}" width="80" style="padding: 10vh 0;">
                     </div>
-                    @else
-                    <div class="col-5"></div>
-                    @endif
-                    <div class="col-2"></div>
-                    <div class="col-5">
-                        <h3>Diusulkan oleh,</h3>
-                        <h3>{{ $data->pegawai->jabatan->jabatan }} {{ $data->pegawai->tim_kerja }}</h3>
-                        <h3 class="my-3"><img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_1 .'/'. $data->kode_usulan) }}" width="150" alt="QR Code"></h3>
-                        <h3>{{ $data->pegawai->nama_pegawai }}</h3>
-                    </div>
-                </div>
-                @if ($data->form_id == 3 || $data->form_id == 6)
-                <div class="row mt-5">
-                    <div class="col-md-12">
-                        <h3 class="lh-base">
-                            {{ Carbon\Carbon::parse($data->tanggal_selesai)->isoFormat('DD MMMM Y') }}
-                        </h3>
-                    </div>
-                    @if ($data->nama_penerima)
-                    <div class="col-5">
-                        <h3>Diserahkan oleh,</h3>
-                        <h3>{{ $data->form_id == 3 ? 'Petugas Gudang' : $data->verif->jabatan->jabatan.' '.$data->verif->tim_kerja }}</h3>
-                        <h3 class="my-3"><img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_4 .'/'. $data->kode_usulan) }}" width="150" alt="QR Code"></h3>
-                        <h3>{{ $data->form_id == 3 ? 'Nando' : 'Staf' }}</h3>
-                    </div>
-                    <div class="col-2"></div>
-                    <div class="col-5">
-                        <h3>Diterima oleh,</h3>
-                        <h3>{{ $data->pegawai->uker->unit_kerja }}</h3>
-                        <h3 class="my-3"><img src="{{ \App\Helpers\QrCodeHelper::generateQrCode('https://siporsat.kemkes.go.id/surat/'. $data->otp_3 .'/'. $data->kode_usulan) }}" width="150" alt="QR Code"></h3>
-                        <h3>{{ $data->nama_penerima }}</h3>
-                    </div>
-                    @endif
-                </div>
+
+                    <p>{{ $data->verif->nama_pegawai }}</p>
+
+                </td>
+
                 @endif
-            </div>
-        </div>
+
+            </tr>
+
+        </table>
 
     </div>
-</body>
 
-<script>
-    window.addEventListener("load", window.print());
-</script>
+</body>
 
 </html>

@@ -18,7 +18,7 @@
     </div>
 </div>
 
-<secti class="content">
+<section class="content">
     <div class="container col-md-9">
         <div class="card border border-dark">
             <div class="card-header">
@@ -370,7 +370,7 @@
             @endif
         </div>
     </div>
-</secti>
+</section>
 
 @section('js')
 

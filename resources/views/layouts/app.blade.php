@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>SIPORSAT | KEMENKES</title>
+    <title>DITJEN P2</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Icon Title -->
     <link rel="icon" type="image/png" href="{{ asset('dist/img/logo-kemenkes-icon.png') }}">
@@ -98,8 +98,8 @@
         <aside class="main-sidebar sidebar-light-primary elevation-4">
             <!-- Brand Logo -->
             <a href="index3.html" class="brand-link">
-                <img src="{{ asset('dist/img/logo-siporsat.png') }}" alt="Sistem Informasi Pergudangan" class="brand-image " style="opacity: .8">
-                <span class="brand-text font-weight-light">SIPORSAT</span>
+                <img src="{{ asset('dist/img/logo-p2.png') }}" alt="Sistem Informasi Pergudangan" class="brand-image " style="opacity: .8">
+                <span class="brand-text font-weight-light">&nbsp;</span>
             </a>
 
             <!-- Sidebar -->
@@ -114,110 +114,31 @@
                             </a>
                         </li>
 
-                        <li class="nav-header"><i>Menu</i></li>
-                        @if (Auth::user()->pegawai->uker->utama_id == '46593')
+                        <li class="nav-header"><i>Alat Tulis Kantor</i></li>
+
                         <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-car"></i>
-                                <p>
-                                    AADB
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('usulan','aadb') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Usulan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('aadb') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kendaraan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-pencil"></i>
-                                <p>
-                                    Alat Tulis Kantor
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('atk') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Permintaan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('usulan','atk') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Usulan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('atk-distribusi') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Distribusi</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
-                        <li class="nav-item">
-                            <a href="{{ route('gdn') }}" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-city"></i>
-                                <p>Gedung Bangunan</p>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('ukt') }}" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-people-roof"></i>
-                                <p>Kerumahtanggaan</p>
+                            <a href="{{ route('atk') }}" class="nav-link font-weight-bold">
+                                <i class="nav-icon fas fa-paper-plane"></i>
+                                <p>Permintaan</p>
                             </a>
                         </li>
 
                         <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-laptop-medical"></i>
-                                <p>
-                                    BMHP & Alkes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
+                            <a href="{{ route('usulan','atk') }}" class="nav-link font-weight-bold">
+                                <i class="nav-icon fas fa-file-alt"></i>
+                                <p>Daftar Usulan</p>
                             </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('bmhp') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Permintaan</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('usulan','bmhp') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Daftar Usulan</p>
-                                    </a>
-                                </li>
-                            </ul>
                         </li>
 
-                        @if (Auth::user()->role_id == 1 || Auth::user()->akses_id)
-                        <li class="nav-header"><i>Master Data</i></li>
+                        <li class="nav-item">
+                            <a href="{{ route('atk-distribusi') }}" class="nav-link font-weight-bold">
+                                <i class="nav-icon fas fa-truck"></i>
+                                <p>Distribusi</p>
+                            </a>
+                        </li>
 
                         @if (Auth::user()->role_id == 1 || Auth::user()->akses_id == 3)
+                        <li class="nav-header"><i>Master Data</i></li>
                         <li class="nav-item">
                             <a href="#" class="nav-link font-weight-bold">
                                 <i class="nav-icon fas fa-pencil"></i>
@@ -257,69 +178,6 @@
                                 </li>
                             </ul>
                         </li>
-                        @endif
-
-
-                        @if (Auth::user()->role_id == 1 || Auth::user()->akses_id == 4)
-                        <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-car"></i>
-                                <p>
-                                    Master AADB
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('aadb') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kendaraan</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('aadb-kategori') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kategori</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
-
-                        @if (Auth::user()->role_id == 1 || Auth::user()->akses_id == 5)
-                        <li class="nav-item">
-                            <a href="#" class="nav-link font-weight-bold">
-                                <i class="nav-icon fas fa-laptop-medical"></i>
-                                <p>
-                                    Master BMHP & Alkes
-                                    <i class="fas fa-angle-left right"></i>
-                                </p>
-                            </a>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ route('bmhp-barang') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Barang</p>
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a href="{{ route('bmhp-kategori') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Kategori</p>
-                                    </a>
-                                </li>
-                            </ul>
-                            <ul class="nav nav-treeview">
-                                <li class="nav-item">
-                                    <a href="{{ Route('bmhp-stok') }}" class="nav-link">
-                                        <i class="far fa-circle nav-icon"></i>
-                                        <p>Stok (Barang Masuk)</p>
-                                    </a>
-                                </li>
-                            </ul>
-                        </li>
-                        @endif
-
                         @endif
 
 
@@ -373,10 +231,10 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <strong>Copyright &copy; 2025 <a href="#">GPS</a>.</strong>
+            <strong>Copyright &copy; 2026 <a href="#">IT Dukman Setditjen P2</a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 2.0
+                <b>Version</b> 1.0
             </div>
         </footer>
     </div>

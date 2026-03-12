@@ -20,6 +20,9 @@
 
 <section class="content">
     <div class="container col-md-9">
+        <a href="{{ url()->previous() }}" class="btn btn-default rounded border-dark mb-3">
+            <i class="fas fa-arrow-left"></i> Kembali
+        </a>
         <div class="card border border-dark">
             <div class="card-header">
                 <label class="mt-2">

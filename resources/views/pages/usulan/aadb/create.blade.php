@@ -3,62 +3,111 @@
 @section('content')
 
 <div class="content-header">
-    <div class="container-fluid col-md-7 mt-5">
+    <div class="container-fluid col-md-8 mt-5">
         <div class="row mb-2">
-            <div class="col-sm-12">
-                <h4 class="m-0">Usulan AADB</h4>
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item active"><a href="{{ route('dashboard') }}"> Dashboard</a></li>
+            <div class="col-sm-12 text-center">
+                <ol class="breadcrumb justify-content-center">
+                    <li class="breadcrumb-item"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                     <li class="breadcrumb-item active">Usulan</li>
                 </ol>
+                <h2 class="font-weight-bold text-dark">Buat Usulan Baru</h2>
+                <p class="text-muted">Pilih kategori layanan kendaraan yang Anda butuhkan saat ini.</p>
             </div>
         </div>
     </div>
 </div>
 
 
-<section class="content">
-    <div class="container-fluid col-md-7 col-12">
-        <div class="row">
-            <div class="col-md-12 col-12 form-group">
-                <a href="{{ route('usulan.create', 'servis') }}" class="btn btn-default border border-dark p-4 w-100 bg-servis">
-                    <div class="row">
-                        <div class="col-md-3 my-auto">
-                            <i class="fas fa-car-on fa-4x"></i>
-                        </div>
-                        <div class="col-md-9 text-justify">
-                            <h6 class="font-weight-bold">Usulan Pemeliharaan</h6>
-                            <span class="small">
-                                Ketentuan : <br>
-                                1. Menjelaskan secara detail terkait kerusakan atau usulan pemeliharaan yang dilakukan. <br>
-                                2. Melampirkan data dukung berupa foto bagian kerusakan atau bagian yang perlu diperbaiki, dengan melampirkan foto dalam bentuk PDF.
-                            </span>
-                        </div>
-                        <div class="col-md-12 mt-3 text-right">
-                            <span class="border border-white p-2 text-sm">Usulkan <i class="fas fa-arrow-right"></i></span>
+<style>
+    /* Membuat shadow lebih halus dan transisi smooth */
+    .option-card {
+        border: none !important;
+        border-radius: 12px !important;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        overflow: hidden;
+    }
+
+    .option-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08) !important;
+    }
+
+    /* Mengatur lebar ikon agar tidak terlalu dominan tapi tetap proporsional */
+    .icon-section {
+        min-width: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* Memperluas jarak antar baris teks */
+    .content-section {
+        padding: 1.5rem 2rem !important;
+        /* Membuat kesan 'luas' */
+    }
+
+    .text-title {
+        font-size: 1.2rem;
+        letter-spacing: 0.3px;
+    }
+</style>
+
+<section class="content py-5">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-9 col-lg-8">
+
+                <a href="{{ route('usulan.create', 'servis') }}" class="text-decoration-none text-dark">
+                    <div class="card option-card shadow-sm mb-4">
+                        <div class="d-flex border-left border-info" style="border-left-width: 6px !important;">
+                            <div class="icon-section bg-light text-info">
+                                <i class="fas fa-tools fa-2x"></i>
+                            </div>
+                            <div class="content-section flex-grow-1 bg-white">
+                                <h5 class="font-weight-bold text-title mb-1">Usulan Pemeliharaan</h5>
+                                <p class="text-muted mb-0 small">Input kerusakan dan perbaikan kendaraan (Lampirkan PDF foto kerusakan).</p>
+                            </div>
+                            <div class="d-flex align-items-center pr-4 bg-white text-muted">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
                         </div>
                     </div>
                 </a>
-            </div>
-            <div class="col-md-12 col-12 form-group">
-                <a href="{{ route('usulan.create', 'bbm') }}" class="btn btn-default border border-dark p-3 w-100 bg-bbm">
-                    <div class="row">
-                        <div class="col-md-3 my-auto">
-                            <i class="fas fa-gas-pump fa-4x"></i>
-                        </div>
-                        <div class="col-md-9 text-justify">
-                            <h6 class="font-weight-bold">Usulan BBM</h6>
-                            <span class="small">
-                                Ketentuan : <br>
-                                1. Usulan BBM dapat diusulkan maksimal tanggal 20 bulan berjalan untuk bulan berikutnya <br>
-                                2. Kendaraan Jabatan : Rp 2.000.000, Kendaraan Operasional, Rp 1.500.000, dan <br> Sepeda Motor : Rp 150.000
-                            </span>
-                        </div>
-                        <div class="col-md-12 mt-3 text-right">
-                            <span class="border border-white p-2 text-sm">Usulkan <i class="fas fa-arrow-right"></i></span>
+
+                <a href="{{ route('usulan.create', 'bbm') }}" class="text-decoration-none text-dark">
+                    <div class="card option-card shadow-sm mb-4">
+                        <div class="d-flex border-left border-success" style="border-left-width: 6px !important;">
+                            <div class="icon-section bg-light text-success">
+                                <i class="fas fa-gas-pump fa-2x"></i>
+                            </div>
+                            <div class="content-section flex-grow-1 bg-white">
+                                <h5 class="font-weight-bold text-title mb-1 text-success">Usulan BBM</h5>
+                                <p class="text-muted mb-0 small">Pengajuan bahan bakar bulanan (Maksimal tanggal 20 setiap bulan).</p>
+                            </div>
+                            <div class="d-flex align-items-center pr-4 bg-white text-muted">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
                         </div>
                     </div>
                 </a>
+
+                <a href="{{ route('usulan.create', 'pinjam') }}" class="text-decoration-none text-dark">
+                    <div class="card option-card shadow-sm mb-4">
+                        <div class="d-flex border-left border-warning" style="border-left-width: 6px !important;">
+                            <div class="icon-section bg-light text-warning">
+                                <i class="fas fa-car fa-2x"></i>
+                            </div>
+                            <div class="content-section flex-grow-1 bg-white">
+                                <h5 class="font-weight-bold text-title mb-1 text-warning">Peminjaman Kendaraan</h5>
+                                <p class="text-muted mb-0 small">Reservasi kendaraan operasional untuk keperluan dinas.</p>
+                            </div>
+                            <div class="d-flex align-items-center pr-4 bg-white text-muted">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
             </div>
         </div>
     </div>
