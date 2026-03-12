@@ -95,7 +95,7 @@
 <body>
 
     <div class="header">
-        <img src="{{ base_path('public/dist/img/header-'.$data->pegawai->uker->utama_id.'.png') }}" width="100%">
+        <img src="http://p2-dukman.site/dist/img/header-46595.png">
     </div>
 
     <div class="title">
